@@ -2,7 +2,6 @@ package com.criptografia;
 
 import java.security.KeyPair;
 import java.security.PrivateKey;
-import java.security.PublicKey;
 
 import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
@@ -40,7 +39,8 @@ public class Boletim {
 
     // Recebe o conteudo descriptografado e salva criptografado
     public void setConteudo(String conteudoDescriptografado) throws Exception {
-        criptografarConteudo(conteudoDescriptografado);
+        this.conteudo = criptografarConteudo(conteudoDescriptografado);
+        assinaturaDigital = assinarDigitalmente();
     }
 
     public byte[] getConteudo() {
