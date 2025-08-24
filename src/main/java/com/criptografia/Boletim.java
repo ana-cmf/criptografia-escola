@@ -22,11 +22,18 @@ public class Boletim {
     
     // Chave que descriptografa o conteudo do boletim
     private byte[] chaveSimetricaCriptografada;
+
+    private PrivateKey ChavePrivadaSimetrica;
+
+    //IV
+    private IvParameterSpec iv;
+
+
     
     public byte[] criptografarConteudo(String conteudo) throws Exception {
         SecretKey chaveSimetrica = CriptografiaSimetrica.geraChave();
         IvParameterSpec ivParameterSpec = CriptografiaSimetrica.geraIv();
-        
+        iv = ivParameterSpec;
         // A chaveSimetricaCriptografada descriptografa o conteúdo do boletim
         this.chaveSimetricaCriptografada = criptografarChaveSimetrica(chaveSimetrica);
         return CriptografiaSimetrica.encripta(conteudo, chaveSimetrica, ivParameterSpec);
@@ -34,6 +41,7 @@ public class Boletim {
     
     public byte[] criptografarChaveSimetrica(SecretKey chaveSimetrica) throws Exception {
         KeyPair keyPair = CriptografiaAssimetrica.geraRSAKeyPair();
+        ChavePrivadaSimetrica =  keyPair.getPrivate();
         Cipher cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
         cipher.init(Cipher.ENCRYPT_MODE, keyPair.getPublic());
         return cipher.doFinal(chaveSimetrica.getEncoded());
@@ -71,5 +79,21 @@ public class Boletim {
     
     public byte[] getChaveSimetricaCriptografada() {
         return chaveSimetricaCriptografada;
+    }
+
+    public IvParameterSpec getIv() {
+        return iv;
+    }
+
+    public void setIv(IvParameterSpec iv) {
+        this.iv = iv;
+    }
+
+    public PrivateKey getChavePrivadaSimetrica() {
+        return ChavePrivadaSimetrica;
+    }
+
+    public void setChavePrivadaSimetrica(PrivateKey chavePrivadaSimetrica) {
+        ChavePrivadaSimetrica = chavePrivadaSimetrica;
     }
 }
