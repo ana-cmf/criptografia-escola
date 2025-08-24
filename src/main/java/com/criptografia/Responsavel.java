@@ -1,9 +1,9 @@
-package com.criptografia.criptografia;
+package com.criptografia;
 
 public class Responsavel {
 
-    byte[] chavePublicaCriptografada;
-    String nome;
+    private byte[] chavePublicaCriptografada;
+    private String nome;
 
     public String getNome() {
         return nome;

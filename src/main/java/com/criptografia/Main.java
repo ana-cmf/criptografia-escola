@@ -3,8 +3,6 @@ package com.criptografia;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import com.criptografia.criptografia.Responsavel;
-
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
