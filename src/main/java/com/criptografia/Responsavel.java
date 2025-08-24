@@ -26,10 +26,8 @@ public class Responsavel {
 
     public SecretKey decritaChave(byte [] chavePublicaCriptografada, PrivateKey privateKey) throws Exception {
 
-        String string = CriptografiaAssimetrica.decripta(chavePublicaCriptografada, privateKey);
+        byte[] bytes = CriptografiaAssimetrica.decripta(chavePublicaCriptografada, privateKey);
 
-        byte[] bytes = new byte[32];
-        bytes = string.getBytes();
 
         SecretKey chave = new SecretKeySpec(bytes,"AES");
         return chave;

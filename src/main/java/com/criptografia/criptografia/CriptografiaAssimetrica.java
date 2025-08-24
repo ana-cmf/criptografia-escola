@@ -24,10 +24,10 @@ public class CriptografiaAssimetrica {
         return cipher.doFinal(mensagem.getBytes(StandardCharsets.UTF_8));
     }
 
-    public static String decripta(byte[] mensagemCifrada, PrivateKey privateKey) throws Exception {
+    public static byte[] decripta(byte[] mensagemCifrada, PrivateKey privateKey) throws Exception {
         Cipher cipher = Cipher.getInstance("RSA");
         cipher.init(Cipher.DECRYPT_MODE, privateKey);
         byte[] mensagemAberta = cipher.doFinal(mensagemCifrada);
-        return new String(mensagemAberta);
+        return mensagemAberta;
     }
 }
